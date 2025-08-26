@@ -1,6 +1,4 @@
 "use client";
-
-import { useState, useEffect, useCallback } from "react";
 import Game from "@/components/Game";
 
 export default function Home() {

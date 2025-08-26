@@ -90,7 +90,7 @@ export default function Game() {
   const [laserTime, setLaserTime] = useState(0);
   const [specialAttackCooldown, setSpecialAttackCooldown] = useState(0);
 
-  const gameLoopRef = useRef<number>();
+  const gameLoopRef = useRef<number | null>(null);
   const nextId = useRef(1);
   const lastEnemySpawn = useRef(0);
   const lastShot = useRef(0);
@@ -479,7 +479,7 @@ export default function Game() {
       setEnemies((prev) =>
         prev
           .map((enemy) => {
-            let newEnemy = { ...enemy };
+            const newEnemy = { ...enemy };
 
             if (enemy.type === "fighter") {
               // Zigzag movement
@@ -809,7 +809,7 @@ export default function Game() {
     gameLoopRef.current = requestAnimationFrame(gameLoop);
 
     return () => {
-      if (gameLoopRef.current) {
+      if (gameLoopRef.current !== null) {
         cancelAnimationFrame(gameLoopRef.current);
       }
     };
@@ -923,7 +923,7 @@ export default function Game() {
                 MISSION FAILED
               </h2>
               <p className="text-gray-400 text-lg">
-                Earth's defenses have been breached
+                Earth&apos;s defenses have been breached
               </p>
             </div>
 
